@@ -87,12 +87,12 @@ impl ServiceContext {
 
 impl Default for ServiceContext {
     fn default() -> Self {
-        let config = ApplicationConfig::default();
+        let mut config = ApplicationConfig::default();
         ServiceContext {
             rb: {
                 let rb = RBatis::new();
-                if rb.is_debug_mode() == false && config.debug.eq(&true) {
-                    panic!(r#"please edit application.json5   “debug: false” "#);
+                if cfg!(debug_assertions) == false && config.debug.eq(&true) {
+                    config.debug = false;
                 }
                 rb
             },
