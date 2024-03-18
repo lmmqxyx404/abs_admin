@@ -34,6 +34,7 @@ pub async fn info(req: Request) -> impl IntoResponse {
 }
 
 pub async fn add(arg: Json<UserAddDTO>) -> impl IntoResponse {
+    log::info!("statr");
     let vo = CONTEXT.sys_user_service.add(arg.0).await;
     return RespVO::from_result(vo).json();
 }

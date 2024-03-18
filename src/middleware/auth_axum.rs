@@ -11,6 +11,7 @@ use axum::{
 };
 
 pub async fn auth(mut request: Request, next: Next) -> Result<Response, StatusCode> {
+    log::info!("auth");
     let path = request.uri().path().to_string();
     if !CONTEXT.config.debug {
         if !is_white_list_api(&path) {
